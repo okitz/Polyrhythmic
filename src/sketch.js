@@ -968,12 +968,6 @@ function drawCamera() {
   camera.position.x = ghost.position.x;
   canvasX = canvas.canvas.getBoundingClientRect().x;
   canvasY = canvas.canvas.getBoundingClientRect().y;
-  // camera.position.y = ghost.position.y;
-  // if (ghost.position.x < 0) ghost.position.x = 0;
-  // if (ghost.position.y < 0) ghost.position.y = 0;
-  // if (ghost.position.x > width * stateNum)
-  //     ghost.position.x = width * stateNum;
-  // if (ghost.position.y > height) ghost.position.y = height;
 }
 function drawTextAlive() {
   beat = player.findBeat(player.timer.position);
@@ -983,8 +977,8 @@ function draw() {
   mouseSprite.position.y = mouseY;
   drawTextAlive();
   background("#FFF3E7");
-  drawScene0();
-  drawScene1();
+  // drawScene0();
+  // drawScene1();
   drawScene2();
   if (!navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
     playButtons.toArray().forEach((button) => {
