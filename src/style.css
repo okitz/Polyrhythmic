@@ -109,6 +109,11 @@ canvas {
 .text-copy-appear {
   animation: stroke-offset-appear 300ms linear;
 }
+.text-copy-vanish-nonanime {
+  animation-fill-mode: forwards;
+  animation: textFadeout 300ms;
+}
+
 .text-copy:nth-child(5n + 1) {
   stroke: #243a7b;
   stroke-dashoffset: 7%;
@@ -140,5 +145,13 @@ canvas {
   0% {
     stroke-dashoffset: 35%;
     stroke-dasharray: 0 87.5%;
+  }
+}
+@keyframes textFadeout {
+  30$ {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
   }
 }
