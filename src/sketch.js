@@ -304,11 +304,11 @@ function setup() {
     <li>
     ${
       optMode
-        ? "現在「軽量モード」です"
+        ? "現在「軽量モード」です→"
         : "スマートフォン等で動作が重い場合はこちら→"
     }<a href=${window.location.origin + window.location.pathname}${
       optMode ? "" : "?light_mode=true"
-    }>${optMode ? "通常モード" : "軽量モード"}</a>
+    }>${optMode ? "通常モードへ" : "軽量モードへ"}</a>
     </li>
     <li type="sqare">
     曲を変更したい場合は↓にURLを入力
@@ -565,6 +565,8 @@ function drawScene0() {
   textSize(width * 0.028);
 
   //////////////////////// ! after player loaded
+  textSize(width * 0.025);
+  text(`FPS: ${frameRate().toFixed(3)}`, width * 0.77, height * 0.82);
   if (player.isLoading) {
     if (!t0[0]) t0[0] = millis();
     text(
@@ -1075,8 +1077,4 @@ function draw() {
     doms.forEach((e) => e.hide());
   }
   textSize(20);
-  text(frameRate(), width * 0.1, height * 0.1);
-  text(frameRate(), width * 0.1 + 1.5 * width, height * 0.1);
-  text(frameRate(), width * 0.1 + 3 * width, height * 0.1);
-  console.log(frameRate());
 }
