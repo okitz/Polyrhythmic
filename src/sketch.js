@@ -1032,5 +1032,7 @@ function draw() {
   }
   textSize(20);
   text(frameRate(), width * 0.1, height * 0.1);
+  text(frameRate(), width * 0.1 + 1.5 * width, height * 0.1);
+  text(frameRate(), width * 0.1 + 3 * width, height * 0.1);
   console.log(frameRate());
 }
