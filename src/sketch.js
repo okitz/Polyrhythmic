@@ -258,14 +258,14 @@ function setup() {
   dTextDiv1.attribute("class", ["svg-text"]);
   dTextDiv1.attribute("id", ["svg-down-text"]);
 
-  new Ztextify(".svg-text", {
-    depth: "10px",
-    layers: 4,
-    fade: false,
-    direction: "both",
-    event: "pointer",
-    eventRotation: "5deg",
-  });
+  // new Ztextify(".svg-text", {
+  //   depth: "10px",
+  //   layers: 4,
+  //   fade: false,
+  //   direction: "both",
+  //   event: "pointer",
+  //   eventRotation: "5deg",
+  // });
   screenDiv1 = createDiv();
   screenDiv1.attribute("class", ["cover"]);
   lightDiv1 = createDiv();
