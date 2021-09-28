@@ -965,11 +965,16 @@ function drawScene2() {
 }
 
 function drawCamera() {
-  if (optMode) {
-    ghost.position.x = (currentState * 1.5 + 0.5) * width;
+  const deff = (currentState * 1.5 + 0.5) * width - ghost.position.x;
+  if (abs(deff) > 0 && optMode) {
+    if (abs(deff) - width * 0.1 < 0) {
+      ghost.position.x = (currentState * 1.5 + 0.5) * width;
+      ghost.velocity.x = 0;
+    } else {
+      ghost.velocity.x = width * 0.1 * (deff / abs(deff));
+    }
   } else {
-    ghost.velocity.x =
-      ((currentState * 1.5 + 0.5) * width - ghost.position.x) / 20;
+    ghost.velocity.x = deff / 20;
   }
   camera.position.x = ghost.position.x;
   canvasX = canvas.canvas.getBoundingClientRect().x;
