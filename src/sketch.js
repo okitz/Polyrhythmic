@@ -869,7 +869,7 @@ function drawScene2() {
         mapcolorID++;
         mapcolorID %= mapColors.length;
       }
-      if (!optMode) {
+      if (optMode) {
         for (
           let i = dotsStart[currentIntercept];
           i < dotsStart[currentIntercept + stepIntercept];
