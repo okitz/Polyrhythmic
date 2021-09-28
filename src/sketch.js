@@ -182,7 +182,7 @@ let canvas,
   maxIntercept,
   dotsStart = [],
   beat,
-  optMode = true;
+  optMode = false;
 
 function preload() {
   pinImg = loadImage("img/pin.png");
@@ -206,6 +206,13 @@ function preload() {
 // }
 
 function setup() {
+  const lightParam = location.search
+    .substring(1)
+    .split("&")
+    .find((p) => p.split("=")[0] == "light_mode");
+  if (lightParam && lightParam.substr(11) == "true") {
+    optMode = true;
+  }
   if (window.innerWidth * 0.8 >= window.innerHeight) {
     height = window.innerHeight;
     width = height * 1.25;
@@ -285,12 +292,23 @@ function setup() {
     <br>
     <a href="https://www.youtube.com/watch?v=Se89rQPp5tk">YouTube</a>
     <a href="https://piapro.jp/t/YW_d">piapro</a>
-    <a href="${window.location.origin}">このアプリで再生</a>
+    <a href="${
+      window.location.origin + window.location.pathname
+    }">このアプリで再生</a>
     <br>
     となっています
     </li>
     <li type="sqare">
     画面のサイズ変更/縦横回転等により表示が崩れた場合は、ページを再読み込みしてください
+    </li>
+    <li>
+    ${
+      optMode
+        ? "現在「軽量モード」です"
+        : "スマートフォン等で動作が重い場合はこちら→"
+    }<a href=${window.location.origin + window.location.pathname}${
+      optMode ? "" : "?light_mode=true"
+    }>${optMode ? "通常モード" : "軽量モード"}</a>
     </li>
     <li type="sqare">
     曲を変更したい場合は↓にURLを入力
@@ -320,12 +338,9 @@ function setup() {
   infoDiv.style("overflow", "overlay");
   infoDiv.style("font-size", `${width * 0.01}px`);
   document.getElementById("reload_button").addEventListener("click", () => {
-    window.location.href = `${window.location.origin}/?song_url=${
-      document.getElementById("song_url_form").value
-    }`;
-    // window.location.href = `${window.location.origin}/?song_url=${
-    //     document.getElementById('song_url_form').value
-    // }`;
+    window.location.href = `${
+      window.location.origin + window.location.pathname
+    }?song_url=${document.getElementById("song_url_form").value}`;
   });
   var hammer = new Hammer(document.body, {
     preventDefault: true,
@@ -559,7 +574,8 @@ function drawScene0() {
     );
     return;
   }
-  if (!player.data.song) window.location.href = window.location.origin;
+  if (!player.data.song)
+    window.location.href = window.location.origin + window.location.pathname;
   if (!t0[1]) t0[1] = millis();
   let consoleTexts = [
     `[voc@loid/miku] > Now Loading...`,
@@ -795,39 +811,55 @@ function drawScene1() {
   document.getElementById("live-lyric2").textContent = renderLyric2;
 
   /// !control Animation
-
-  if (!appearAnimated1 && nextPhrase1.startTime <= player.timer.position) {
-    appearAnimated1 = true;
-    [...document.getElementsByClassName("text-copy")].forEach((e) => {
-      e.classList.remove(
-        optMode ? "text-copy-vanish-nonanime" : "text-copy-vanish"
-      );
-      window.requestAnimationFrame(function () {
+  if (optMode) {
+    if (!appearAnimated1 && nextPhrase1.startTime <= player.timer.position) {
+      appearAnimated1 = true;
+      [...document.getElementsByClassName("text-copy")].forEach((e) => {
+        e.style.display = "";
+      });
+    }
+    if (
+      !vanishAnimated1 &&
+      ((!nextPhrase1.next &&
+        nextPhrase1.endTime <= player.timer.position + 300) ||
+        (nextPhrase1.next != null &&
+          nextPhrase1.next.startTime <= player.timer.position + 300))
+    ) {
+      vanishAnimated1 = true;
+      [...document.getElementsByClassName("text-copy")].forEach((e) => {
+        e.style.display = "none";
+      });
+    }
+  } else {
+    if (!appearAnimated1 && nextPhrase1.startTime <= player.timer.position) {
+      appearAnimated1 = true;
+      [...document.getElementsByClassName("text-copy")].forEach((e) => {
+        e.classList.remove("text-copy-vanish");
         window.requestAnimationFrame(function () {
-          if (!optMode) e.classList.add("text-copy-appear");
-          e.style.display = "";
+          window.requestAnimationFrame(function () {
+            e.classList.add("text-copy-appear");
+            e.style.display = "";
+          });
         });
       });
-    });
-  }
-  if (
-    !vanishAnimated1 &&
-    ((!nextPhrase1.next &&
-      nextPhrase1.endTime <= player.timer.position + 300) ||
-      (nextPhrase1.next != null &&
-        nextPhrase1.next.startTime <= player.timer.position + 300))
-  ) {
-    vanishAnimated1 = true;
-    [...document.getElementsByClassName("text-copy")].forEach((e) => {
-      if (!optMode) e.classList.remove("text-copy-appear");
-      window.requestAnimationFrame(function () {
+    }
+    if (
+      !vanishAnimated1 &&
+      ((!nextPhrase1.next &&
+        nextPhrase1.endTime <= player.timer.position + 300) ||
+        (nextPhrase1.next != null &&
+          nextPhrase1.next.startTime <= player.timer.position + 300))
+    ) {
+      vanishAnimated1 = true;
+      [...document.getElementsByClassName("text-copy")].forEach((e) => {
+        e.classList.remove("text-copy-appear");
         window.requestAnimationFrame(function () {
-          e.classList.add(
-            optMode ? "text-copy-vanish-nonanime" : "text-copy-vanish"
-          );
+          window.requestAnimationFrame(function () {
+            e.classList.add("text-copy-vanish");
+          });
         });
       });
-    });
+    }
   }
 }
 
