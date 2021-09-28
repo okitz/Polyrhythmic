@@ -184,7 +184,7 @@ let canvas,
   beat;
 
 function preload() {
-  pinImg = loadImage("img/pin.svg");
+  pinImg = loadImage("img/pin.png");
   playImg1 = loadImage("img/replay1.svg");
   playImg2 = loadImage("img/replay2.svg");
   pauseImg1 = loadImage("img/pause1.svg");
@@ -985,7 +985,7 @@ function draw() {
   background("#FFF3E7");
   drawScene0();
   drawScene1();
-  // drawScene2();
+  drawScene2();
   if (!navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
     playButtons.toArray().forEach((button) => {
       if (!player.isPlaying)
