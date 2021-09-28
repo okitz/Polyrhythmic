@@ -191,14 +191,7 @@ function preload() {
   pauseImg2 = loadImage("img/pause2.svg");
   infoImg1 = loadImage("img/info1.svg");
   infoImg2 = loadImage("img/info2.svg");
-  /*penStopImg = loadImage(pens['pens0005']);
-    penAnime = loadAnimation(
-        pens['pens0005'],
-        pens['pens0006'],
-        pens['pens0007'],
-        pens['pens0006'],
-        pens['pens0005']
-    );*/
+
   penImg = loadImage("img/pen.png");
 }
 
@@ -380,25 +373,25 @@ function spriteSetup() {
   mikuSprite1.scale = (width / 96) * 0.2;
   mikuSprite1.position = { x: width * 2, y: height * 0.57 };
 
-  penlightGroup = new Group();
-  for (let i = 2; i < 7; i++) {
-    penlightGroup.add(createSprite(width * (1.5 + i / 8), height * 0.84));
-  }
-  for (let i = 0; i < 2; i++) {
-    penlightGroup.add(createSprite(width * 1.6, height * (0.84 - 0.12 * i)));
-    penlightGroup.add(createSprite(width * 2.4, height * (0.84 - 0.12 * i)));
-  }
-  penlightGroup.toArray().forEach((penlight) => {
-    penlight.default_rotation = (Math.random() - 0.5) * 20;
-    // penlight.addImage('stop', penStopImg);
-    // penAnime.looping = false;
-    // penlight.addAnimation('swing', penAnime);
-    // penlight.scale = width * 0.00025;
-    penlight.addImage(penImg);
-    penlight.scale = width * 0.0006;
+  // penlightGroup = new Group();
+  // for (let i = 2; i < 7; i++) {
+  //   penlightGroup.add(createSprite(width * (1.5 + i / 8), height * 0.84));
+  // }
+  // for (let i = 0; i < 2; i++) {
+  //   penlightGroup.add(createSprite(width * 1.6, height * (0.84 - 0.12 * i)));
+  //   penlightGroup.add(createSprite(width * 2.4, height * (0.84 - 0.12 * i)));
+  // }
+  // penlightGroup.toArray().forEach((penlight) => {
+  //   penlight.default_rotation = (Math.random() - 0.5) * 20;
+  //   // penlight.addImage('stop', penStopImg);
+  //   // penAnime.looping = false;
+  //   // penlight.addAnimation('swing', penAnime);
+  //   // penlight.scale = width * 0.00025;
+  //   penlight.addImage(penImg);
+  //   penlight.scale = width * 0.0006;
 
-    penlight.rotation = penlight.default_rotation;
-  });
+  //   penlight.rotation = penlight.default_rotation;
+  // });
 }
 function graphicsSetup() {
   mapGraphics = createGraphics(width, height);
@@ -437,13 +430,9 @@ function windowResized() {
 }
 
 function mousePressed() {
-  penlightGroup.toArray().forEach((penlight) => {
-    // const delay = ((60 / 1000) * (durationSum / durationCnt)) / 4;
-    // penlight.animation.frameDelay = 3;
-    // penlight.changeAnimation('swing');
-    // penlight.animation.rewind();
-    penlight.rotationSpeed = 6;
-  });
+  // penlightGroup.toArray().forEach((penlight) => {
+  //   penlight.rotationSpeed = 6;
+  // });
 }
 
 function swiped(event) {
@@ -707,16 +696,16 @@ function drawScene1() {
 
   //////////////////////// ! while player playing
   drawSprite(mikuSprite1);
-  drawSprites(penlightGroup);
-  penlightGroup.toArray().forEach((penlight) => {
-    // if (penlight.animation.getFrame() == 5) {
-    //     penlight.changeImage('stop');
-    // }
-    if (penlight.rotation > 25 + penlight.default_rotation)
-      penlight.rotationSpeed = -6;
-    else if (penlight.rotation < penlight.default_rotation)
-      penlight.rotationSpeed = 0;
-  });
+  // drawSprites(penlightGroup);
+  // penlightGroup.toArray().forEach((penlight) => {
+  //   // if (penlight.animation.getFrame() == 5) {
+  //   //     penlight.changeImage('stop');
+  //   // }
+  //   if (penlight.rotation > 25 + penlight.default_rotation)
+  //     penlight.rotationSpeed = -6;
+  //   else if (penlight.rotation < penlight.default_rotation)
+  //     penlight.rotationSpeed = 0;
+  // });
   if (!player.isPlaying) {
     mikuSprite1.setVelocity(0, 0);
     mikuSprite1.setVelocity(0, 0);
