@@ -985,7 +985,7 @@ function draw() {
   drawTextAlive();
   background("#FFF3E7");
   drawScene0();
-  drawScene1();
+  // drawScene1();
   drawScene2();
   if (!navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
     playButtons.toArray().forEach((button) => {
