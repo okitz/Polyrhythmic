@@ -984,6 +984,7 @@ function draw() {
   // drawScene0();
   // drawScene1();
   drawScene2();
+
   if (!navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
     playButtons.toArray().forEach((button) => {
       if (!player.isPlaying)
@@ -1029,4 +1030,7 @@ function draw() {
     );
     doms.forEach((e) => e.hide());
   }
+  textSize(20);
+  text(frameRate(), width * 0.1, height * 0.1);
+  console.log(frameRate());
 }
