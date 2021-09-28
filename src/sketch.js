@@ -965,8 +965,12 @@ function drawScene2() {
 }
 
 function drawCamera() {
-  ghost.velocity.x =
-    ((currentState * 1.5 + 0.5) * width - ghost.position.x) / 20;
+  if (optMode) {
+    ghost.position.x = (currentState * 1.5 + 0.5) * width;
+  } else {
+    ghost.velocity.x =
+      ((currentState * 1.5 + 0.5) * width - ghost.position.x) / 20;
+  }
   camera.position.x = ghost.position.x;
   canvasX = canvas.canvas.getBoundingClientRect().x;
   canvasY = canvas.canvas.getBoundingClientRect().y;
