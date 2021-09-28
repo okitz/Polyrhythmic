@@ -519,37 +519,46 @@ function drawScene0() {
   const Scene = 0,
     Origin = Scene * 1.5 * width,
     aaText = `
-        
-                    ＿＿＿＿＿＿＿＿＿＿＿
-                   |                      |
-                   |                      |
-　＿　　　＿　 /ﾌ  |                      |
- /ヽ》⌒⌒ヾ》//>  |                      |
-｜ |ﾐ ノﾘハｿﾉ/／ ／                       |
-｜ |＠ﾟヮﾟﾉﾘ//|  ＼                       |
-｜||とﾌ介(つ/||    |                      |
-｜|| </_LL> |||     ￣￣￣￣￣￣￣￣￣￣￣
- )ノ　∪ﾌ　 ﾙノ    `,
+　　　　　　　　　　　　　　 　＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+　　　　　　　　　　　　　　　 |　　　　　　　　　　　　　　 |
+　　　　　　　　　　　　　　　/ 　　　　　　　　　　　　　　 |
+　　　　　　　　　　　　　　 /  　　　　　　　　　　　　　　 |
+　　　　　　　　　　　　　　/　 　　　　　　　　　　　　　 　|
+     　　　＿＿＿＿＿　　　/　  　　　　　　　　　　　　　 　|
+    　＿／            ＼＿ ￣￣|　　　　　　　　　　　　　 　|
+    ／\\ \\　゛゛゛゛゛　/ /＼　 |　　　　　　　　　　　　　 　|
+   ｜/ \\ \\/＼／＼／＼// / \\｜　|　　　　　　　　　　　　　 　|
+   /　 / /|　－　－　|\\ \\ 　\\　￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+  / 　/ / |　〇　〇　| \\ \\ 　\\
+ /  　丁　|＠　□　＠|　丁  　\\
+｜    ｜　|　　　　　|  ｜    ｜
+｜　|　\\　 ￣￣￣￣￣   /　|　｜
+｜　\\ 　\\　　　　　　  /　 /　｜
+        `,
     aaText2 = `
-        
-                    ＿＿＿＿＿＿＿＿＿＿＿
-                   |                      |
-                /ﾌ |                      |
-　＿　　　＿　 //> |                      |
- /ヽ》⌒⌒ヾ》/／  |                      |
-｜ |ﾐ ノﾘハｿﾉ//  ／                       |
-｜ |＠ﾟヮﾟﾉつ/|  ＼                       |
-｜||／ﾌ介(/ |||    |                      |
-｜|し</_LL> |||     ￣￣￣￣￣￣￣￣￣￣￣
- )ノ　じﾌ　 ﾙノ   `;
-
+　　　　　　　　　　　　　　 　＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+　　　　　　　　　　　　　　　 |　　　　　　　　　　　　　　 |
+　　　　　　　　　　　　　　　/ 　　　　　　　　　　　　　　 |
+　　　　　　　　　　　　　　 /  　　　　　　　　　　　　　　 |
+　　　　　　　　　　　　　　/　 　　　　　　　　　　　　　 　|
+     　　　＿＿＿＿＿　　　/　  　　　　　　　　　　　　　 　|
+    　＿／            ＼＿ ￣￣|　　　　　　　　　　　　　 　|
+    ／\\ \\　゛゛゛゛゛　/ /＼　 |　　　　　　　　　　　　　 　|
+   ｜/ \\ \\/＼／＼／＼// / \\｜　|　　　　　　　　　　　　　 　|
+   /　 / /|　＿　＿　|\\ \\ 　\\　￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+  / 　/ / |　〇　〇　| \\ \\ 　\\
+ /  　丁　|＠　－　＠|　丁  　\\
+｜    ｜　|　　　　　|  ｜    ｜
+｜　|　\\　 ￣￣￣￣￣   /　|　｜
+｜　\\ 　\\　　　　　　  /　 /　｜
+        `;
   drawDisplay(Scene, Origin, "black");
   textAlign(LEFT);
   textFont("PixelMplus10");
   fill("#00FF33");
   textLeading(width * 0.029);
   textSize(width * 0.028);
-  console.log(frameRate());
+
   //////////////////////// ! after player loaded
   if (player.isLoading) {
     if (!t0[0]) t0[0] = millis();
@@ -579,12 +588,14 @@ function drawScene0() {
   if (32 + (millis() - t0[1]) / 15 >= consoleTexts.join("\n").length) {
     if (!t0[2]) t0[2] = millis();
     textSize(width * 0.038);
-    textLeading(width * 0.038);
+    textLeading(width * 0.028);
+    textSize(width * 0.028);
     text(
       (aaSwitch ? aaText : aaText2).substr(0, (millis() - t0[2]) / 2),
-      width * 0.1,
-      height * 0.25
+      width * 0.075,
+      height * 0.285
     );
+
     const beatChanged = beat != lastBeat0;
     lastBeat0 = beat;
     if (player.isPlaying) {
@@ -609,7 +620,7 @@ function drawScene0() {
     }
     textSize(width * 0.06);
     textLeading(width * 0.1);
-    text(renderLyric, width * 0.5, height * 0.48);
+    text(renderLyric, width * 0.54, height * 0.425);
     aaSwitch = beatChanged ^ aaSwitch;
   }
 }
