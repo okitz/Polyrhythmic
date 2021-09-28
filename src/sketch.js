@@ -795,34 +795,55 @@ function drawScene1() {
   document.getElementById("live-lyric2").textContent = renderLyric2;
 
   /// !control Animation
-  if (!appearAnimated1 && nextPhrase1.startTime <= player.timer.position) {
-    appearAnimated1 = true;
-    [...document.getElementsByClassName("text-copy")].forEach((e) => {
-      e.classList.remove("text-copy-vanish");
-      window.requestAnimationFrame(function () {
+  if (optMode) {
+    if (!appearAnimated1 && nextPhrase1.startTime <= player.timer.position) {
+      appearAnimated1 = true;
+      [...document.getElementsByClassName("text-copy")].forEach((e) => {
+        e.style.display = "";
+      });
+    }
+    if (
+      !vanishAnimated1 &&
+      ((!nextPhrase1.next &&
+        nextPhrase1.endTime <= player.timer.position + 300) ||
+        (nextPhrase1.next != null &&
+          nextPhrase1.next.startTime <= player.timer.position + 300))
+    ) {
+      vanishAnimated1 = true;
+      [...document.getElementsByClassName("text-copy")].forEach((e) => {
+        e.style.display = "none";
+      });
+    }
+  } else {
+    if (!appearAnimated1 && nextPhrase1.startTime <= player.timer.position) {
+      appearAnimated1 = true;
+      [...document.getElementsByClassName("text-copy")].forEach((e) => {
+        e.classList.remove("text-copy-vanish");
         window.requestAnimationFrame(function () {
-          e.classList.add("text-copy-appear");
-          e.style.display = "";
+          window.requestAnimationFrame(function () {
+            e.classList.add("text-copy-appear");
+            e.style.display = "";
+          });
         });
       });
-    });
-  }
-  if (
-    !vanishAnimated1 &&
-    ((!nextPhrase1.next &&
-      nextPhrase1.endTime <= player.timer.position + 300) ||
-      (nextPhrase1.next != null &&
-        nextPhrase1.next.startTime <= player.timer.position + 300))
-  ) {
-    vanishAnimated1 = true;
-    [...document.getElementsByClassName("text-copy")].forEach((e) => {
-      e.classList.remove("text-copy-appear");
-      window.requestAnimationFrame(function () {
+    }
+    if (
+      !vanishAnimated1 &&
+      ((!nextPhrase1.next &&
+        nextPhrase1.endTime <= player.timer.position + 300) ||
+        (nextPhrase1.next != null &&
+          nextPhrase1.next.startTime <= player.timer.position + 300))
+    ) {
+      vanishAnimated1 = true;
+      [...document.getElementsByClassName("text-copy")].forEach((e) => {
+        e.classList.remove("text-copy-appear");
         window.requestAnimationFrame(function () {
-          e.classList.add("text-copy-vanish");
+          window.requestAnimationFrame(function () {
+            e.classList.add("text-copy-vanish");
+          });
         });
       });
-    });
+    }
   }
 }
 
@@ -967,11 +988,11 @@ function drawScene2() {
 function drawCamera() {
   const deff = (currentState * 1.5 + 0.5) * width - ghost.position.x;
   if (abs(deff) > 0 && optMode) {
-    if (abs(deff) - width * 0.1 < 0) {
+    if (abs(deff) - width * 0.2 < 0) {
       ghost.position.x = (currentState * 1.5 + 0.5) * width;
       ghost.velocity.x = 0;
     } else {
-      ghost.velocity.x = width * 0.1 * (deff / abs(deff));
+      ghost.velocity.x = width * 0.2 * (deff / abs(deff));
     }
   } else {
     ghost.velocity.x = deff / 20;
