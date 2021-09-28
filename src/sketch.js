@@ -834,7 +834,7 @@ function scaleEase(t) {
 
   if (0 < x && x <= 1)
     ret = pow(4, -x) * sin(((x * 3 - 1) * Math.PI) / 2) + 1 + 0.001;
-  else if (beat && optMode) {
+  else if (beat && !optMode) {
     durationSum += beat.duration;
     durationCnt++;
     ret =
@@ -869,19 +869,17 @@ function drawScene2() {
         mapcolorID++;
         mapcolorID %= mapColors.length;
       }
-      if (!optMode) {
-        for (
-          let i = dotsStart[currentIntercept];
-          i < dotsStart[currentIntercept + stepIntercept];
-          i++
-        ) {
-          const dot = dots[i];
-          mapGraphics.stroke(mapColors[mapcolorID]);
-          mapGraphics.point(
-            width * (dot[0] * 0.0009 + 0.085),
-            width * (dot[1] * 0.0009 + 0.055)
-          );
-        }
+      for (
+        let i = dotsStart[currentIntercept];
+        i < dotsStart[currentIntercept + stepIntercept];
+        i++
+      ) {
+        const dot = dots[i];
+        mapGraphics.stroke(mapColors[mapcolorID]);
+        mapGraphics.point(
+          width * (dot[0] * 0.0009 + 0.085),
+          width * (dot[1] * 0.0009 + 0.055)
+        );
       }
 
       if (currentIntercept < maxIntercept) currentIntercept += stepIntercept;
@@ -981,7 +979,7 @@ function draw() {
   mouseSprite.position.y = mouseY;
   drawTextAlive();
   background("#FFF3E7");
-  // drawScene0();
+  drawScene0();
   // drawScene1();
   drawScene2();
 
