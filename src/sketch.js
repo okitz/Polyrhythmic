@@ -834,7 +834,7 @@ function scaleEase(t) {
 
   if (0 < x && x <= 1)
     ret = pow(4, -x) * sin(((x * 3 - 1) * Math.PI) / 2) + 1 + 0.001;
-  else if (beat && !optMode) {
+  else if (beat && optMode) {
     durationSum += beat.duration;
     durationCnt++;
     ret =
@@ -869,7 +869,7 @@ function drawScene2() {
         mapcolorID++;
         mapcolorID %= mapColors.length;
       }
-      if (optMode) {
+      if (!optMode) {
         for (
           let i = dotsStart[currentIntercept];
           i < dotsStart[currentIntercept + stepIntercept];
