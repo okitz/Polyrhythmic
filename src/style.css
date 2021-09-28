@@ -1,0 +1,144 @@
+/*
+Using "Elastic stroke CSS + SVG"
+https://codepen.io/yoksel/pen/XJbzrO/
+
+Copyright (c) 2014 yoksel
+Released under the MIT license
+http://opensource.org/licenses/mit-license.php
+*/
+
+.z-text-img {
+  user-select: none;
+}
+
+.z-layer:not(:first-child) {
+  filter: brightness(0.7);
+}
+img {
+  object-fit: cover;
+}
+main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+}
+canvas {
+  margin: auto;
+}
+#media {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  z-index: -1;
+}
+#lyrics {
+  position: absolute;
+  overflow: hidden;
+  color: #df3064;
+  white-space: nowrap;
+  font-family: "RocknRoll One";
+}
+.info-modal {
+  background-color: #fff3e7;
+}
+.info-appear {
+  animation: fadeIn 0.4s;
+}
+.info-desappear {
+  animation: fadeOut 0.4s;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeIn {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  100% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+}
+
+@font-face {
+  font-family: "PixelMplus10";
+  src: url(./assets/PixelMplus/PixelMplus12-Regular.ttf) format("truetype");
+}
+
+.svg-text {
+  font: 4em/1 Arial;
+}
+
+.z-layer svg {
+  position: absolute;
+  width: 100vw;
+  width: 100vh;
+}
+.cover {
+  position: absolute;
+  background: rgba(0, 256, 256, 0.08)
+    radial-gradient(rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.2) 40%) center / 7px
+    7px;
+}
+
+.text-copy {
+  filter: brightness(110%) blur(0.6px);
+  fill: none;
+  fill-opacity: 0;
+  stroke: white;
+  stroke-dasharray: 7% 28%;
+  stroke-width: 2.5px;
+  font-family: "RocknRoll One";
+}
+.text-copy-vanish {
+  animation-fill-mode: forwards;
+  animation: stroke-offset-vanish 300ms linear;
+}
+.text-copy-appear {
+  animation: stroke-offset-appear 300ms linear;
+}
+.text-copy:nth-child(5n + 1) {
+  stroke: #243a7b;
+  stroke-dashoffset: 7%;
+}
+.text-copy:nth-child(5n + 2) {
+  stroke: #cb213c;
+  stroke-dashoffset: 14%;
+}
+.text-copy:nth-child(5n + 3) {
+  stroke: #ffd430;
+  stroke-dashoffset: 21%;
+}
+.text-copy:nth-child(5n + 4) {
+  stroke: #ecafc9;
+  stroke-dashoffset: 28%;
+}
+.text-copy:nth-child(5n + 5) {
+  stroke: #2b90a2;
+  stroke-dashoffset: 35%;
+}
+
+@keyframes stroke-offset-vanish {
+  100% {
+    stroke-dashoffset: 35%;
+    stroke-dasharray: 0 87.5%;
+  }
+}
+@keyframes stroke-offset-appear {
+  0% {
+    stroke-dashoffset: 35%;
+    stroke-dasharray: 0 87.5%;
+  }
+}

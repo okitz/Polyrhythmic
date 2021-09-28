@@ -1,0 +1,115 @@
+.light {
+    $bottomlight: null;
+    $sidelight: null;
+    position: absolute;
+
+    $toplight: conic-gradient(
+            from 0.02turn at #{50% - 16%} 5%,
+            rgba(255, 255, 255, 0.01) 170deg,
+            rgba(255, 255, 128, 0.25),
+            rgba(255, 255, 128, 0.3),
+            rgba(255, 255, 128, 0.3),
+            rgba(255, 255, 128, 0.25),
+            rgba(255, 255, 255, 0.01) 190deg
+        ),
+        conic-gradient(
+            from 0.04turn at #{50% - 2 * 16%} 5%,
+            rgba(255, 255, 255, 0.01) 170deg,
+            rgba(219, 96, 113, 0.25),
+            rgba(219, 96, 113, 0.3),
+            rgba(219, 96, 113, 0.3),
+            rgba(219, 96, 113, 0.25),
+            rgba(255, 255, 255, 0.01) 190deg
+        ),
+        conic-gradient(
+            from -0.02turn at #{50% + 16%} 5%,
+            rgba(255, 255, 255, 0.01) 170deg,
+            rgba(255, 128, 255, 0.25),
+            rgba(255, 128, 255, 0.3),
+            rgba(255, 128, 255, 0.3),
+            rgba(255, 128, 255, 0.25),
+            rgba(255, 255, 255, 0.01) 190deg
+        ),
+        conic-gradient(
+            from -0.04turn at #{50% + 2 * 16%} 5%,
+            rgba(255, 255, 255, 0.01) 170deg,
+            rgba(135, 148, 222, 0.25),
+            rgba(135, 148, 222, 0.3),
+            rgba(135, 148, 222, 0.3),
+            rgba(135, 148, 222, 0.25),
+            rgba(255, 255, 255, 0.01) 190deg
+        );
+
+    $topcircle: radial-gradient(
+            at #{50% - 16%} 5%,
+            rgba(255, 255, 128, 0.6) 1%,
+            rgba(255, 255, 128, 0.01) 2%,
+            rgba(255, 255, 255, 0)
+        ),
+        radial-gradient(
+            at #{50% - 2 * 16%} 5%,
+            rgba(219, 96, 113, 0.6) 1%,
+            rgba(255, 255, 128, 0.01) 2%,
+            rgba(255, 255, 255, 0)
+        ),
+        radial-gradient(
+            at #{50% + 16%} 5%,
+            rgba(255, 128, 255, 0.6) 1%,
+            rgba(255, 128, 255, 0.01) 2%,
+            rgba(255, 255, 255, 0)
+        ),
+        radial-gradient(
+            at #{50% + 2 * 16%} 5%,
+            rgba(135, 148, 222, 0.6) 1%,
+            rgba(255, 128, 255, 0.01) 2%,
+            rgba(255, 255, 255, 0)
+        );
+
+    @for $i from -1 through 1 {
+        $bottomlight: $bottomlight
+            conic-gradient(
+                from #{0.5}turn at #{50% + $i * 30%} 48%,
+                rgba(255, 255, 255, 0) 150deg,
+                rgba(128, 255, 255, 0.1),
+                rgba(128, 255, 255, 0.2),
+                rgba(128, 255, 255, 0.2),
+                rgba(128, 255, 255, 0.1),
+                rgba(255, 255, 255, 0) 210deg
+            )
+            #{if($i !=1, ',', '')};
+    }
+
+    @for $i from 0 through 1 {
+        $sidelight: $sidelight
+                conic-gradient(
+                    from 0.9turn at 0% #{20% + $i * 40%},
+                    rgba(255, 255, 255, 0) 170deg,
+                    rgba(255, 255, 255, 0.05),
+                    rgba(255, 255, 255, 0.13),
+                    rgba(255, 255, 255, 0.13),
+                    rgba(255, 255, 255, 0.05),
+                    rgba(255, 255, 255, 0) 190deg
+                ),
+            conic-gradient(
+                    from 0.1turn at 100% #{20% + $i * 40%},
+                    rgba(255, 255, 255, 0) 170deg,
+                    rgba(255, 255, 255, 0.05),
+                    rgba(255, 255, 255, 0.13),
+                    rgba(255, 255, 255, 0.13),
+                    rgba(255, 255, 255, 0.05),
+                    rgba(255, 255, 255, 0) 190deg
+                )
+                #{if($i !=1, ',', '')};
+    }
+    background: linear-gradient(
+            217deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 0, 0, 0) 70.71%
+        ),
+        linear-gradient(
+            127deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(0, 255, 0, 0) 70.71%
+        ),
+        $toplight, $bottomlight, $topcircle, $sidelight;
+}

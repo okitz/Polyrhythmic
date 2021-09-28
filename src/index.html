@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>TextAlive App API | basic example</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- 
+    "RocknRoll One" licensed under the SIL Open Font License
+    https://github.com/fontworks-fonts/RocknRoll 
+    -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 
+    "Kaisei" licensed under the SIL Open Font License
+    https://github.com/FontKai-Kaisei/Kaisei
+    -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
+    <script src="lib/hammer.min.js"></script>
+    <script src="lib/ztext.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js" integrity="sha512-N4kV7GkNv7QR7RX9YF/olywyIgIwNvfEe2nZtfyj73HdjCUkAfOBDbcuJ/cTaN04JKRnw1YG1wnUyNKMsNgg3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/gh/molleindustria/p5.play/lib/p5.play.js "></script>
+    <!-- <script src="lib/p5.min.js"></script> -->
+    <!-- <script src="lib/p5.play.js"></script> -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <div id="media"></div>
+    <script src="sketch.js"></script>
+    <svg display="none">
+      <symbol id="s-text1">
+        <text
+          text-anchor="start"
+          class="text--line"
+          id="live-lyric1"
+          dominant-baseline="text-before-edge"
+        ></text>
+      </symbol>
+      <symbol id="s-text2">
+        <text
+          text-anchor="start"
+          class="text--line"
+          id="live-lyric2"
+          dominant-baseline="text-before-edge"
+        ></text>
+      </symbol>
+    </svg>
+  </body>
+</html>
