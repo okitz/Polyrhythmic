@@ -306,6 +306,9 @@ function setup() {
     <li type="sqare">
     画面のサイズ変更/縦横回転等により表示が崩れた場合は、ページを再読み込みしてください
     </li>
+    <li type="sqare">
+    <strong>中央の画面(LIVE風演出)は読み込みがあるため初め動作がかなり重くなる可能性があります</strong>
+    </li>
     <li>
     ${
       optMode
