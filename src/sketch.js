@@ -2,7 +2,12 @@
 const { Player } = TextAliveApp;
 let player = new Player({
   app: {
-    token: "SCbJEML9pACmXLoh",
+    token:
+      document.location.hostname == "localhost" ||
+      document.location.hostname == "127.0.0.1"
+        ? "UNdGaSHl9WdUtK3R"
+        : "SCbJEML9pACmXLoh",
+    //  token: "SCbJEML9pACmXLoh",
   },
   mediaElement: document.querySelector("#media"),
 });
