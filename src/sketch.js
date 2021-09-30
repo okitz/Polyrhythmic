@@ -2,7 +2,7 @@
 const { Player } = TextAliveApp;
 let player = new Player({
   app: {
-    token: "UNdGaSHl9WdUtK3R",
+    token: "SCbJEML9pACmXLoh",
   },
   mediaElement: document.querySelector("#media"),
 });
@@ -304,8 +304,8 @@ function setup() {
     <li>
     ${
       optMode
-        ? "現在「軽量モード」です→"
-        : "スマートフォン等で動作が重い場合はこちら→"
+        ? "現在<strong>「軽量モード」</strong>です→"
+        : "<strong>スマートフォン等で動作が重い場合はこちら</strong>→"
     }<a href=${window.location.origin + window.location.pathname}${
       optMode ? "" : "?light_mode=true"
     }>${optMode ? "通常モードへ" : "軽量モードへ"}</a>
@@ -519,7 +519,9 @@ function expandInfo() {
 let t0 = [],
   aaSwitch = true,
   currentLyric0 = "",
-  lastBeat0;
+  lastBeat0,
+  currentFPS = 0,
+  frameForFPS = 0;
 function drawScene0() {
   const Scene = 0,
     Origin = Scene * 1.5 * width,
@@ -529,7 +531,7 @@ function drawScene0() {
 　　　　　　　　　　　　　　　/ 　　　　　　　　　　　　　　 |
 　　　　　　　　　　　　　　 /  　　　　　　　　　　　　　　 |
 　　　　　　　　　　　　　　/　 　　　　　　　　　　　　　 　|
-     　　　＿＿＿＿＿　　　/　  　　　　　　　　　　　　　 　|
+    　　　＿＿＿＿＿＿ 　　/　  　　　　　　　　　　　　　 　|
     　＿／            ＼＿ ￣￣|　　　　　　　　　　　　　 　|
     ／\\ \\　゛゛゛゛゛　/ /＼　 |　　　　　　　　　　　　　 　|
    ｜/ \\ \\/＼／＼／＼// / \\｜　|　　　　　　　　　　　　　 　|
@@ -538,7 +540,7 @@ function drawScene0() {
  /  　丁　|＠　□　＠|　丁  　\\
 ｜    ｜　|　　　　　|  ｜    ｜
 ｜　|　\\　 ￣￣￣￣￣   /　|　｜
-｜　\\ 　\\　　　　　　  /　 /　｜
+｜　\\ 　\\　　／　＼　  /　 /　｜
         `,
     aaText2 = `
 　　　　　　　　　　　　　　 　＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
@@ -546,7 +548,7 @@ function drawScene0() {
 　　　　　　　　　　　　　　　/ 　　　　　　　　　　　　　　 |
 　　　　　　　　　　　　　　 /  　　　　　　　　　　　　　　 |
 　　　　　　　　　　　　　　/　 　　　　　　　　　　　　　 　|
-     　　　＿＿＿＿＿　　　/　  　　　　　　　　　　　　　 　|
+    　　　＿＿＿＿＿＿ 　　/　  　　　　　　　　　　　　　 　|
     　＿／            ＼＿ ￣￣|　　　　　　　　　　　　　 　|
     ／\\ \\　゛゛゛゛゛　/ /＼　 |　　　　　　　　　　　　　 　|
    ｜/ \\ \\/＼／＼／＼// / \\｜　|　　　　　　　　　　　　　 　|
@@ -555,7 +557,7 @@ function drawScene0() {
  /  　丁　|＠　－　＠|　丁  　\\
 ｜    ｜　|　　　　　|  ｜    ｜
 ｜　|　\\　 ￣￣￣￣￣   /　|　｜
-｜　\\ 　\\　　　　　　  /　 /　｜
+｜　\\ 　\\　　／　＼　  /　 /　｜
         `;
   drawDisplay(Scene, Origin, "black");
   textAlign(LEFT);
@@ -566,7 +568,9 @@ function drawScene0() {
 
   //////////////////////// ! after player loaded
   textSize(width * 0.025);
-  text(`FPS: ${frameRate().toFixed(3)}`, width * 0.77, height * 0.82);
+  if (frameForFPS % 10 === 0) currentFPS = frameRate().toFixed(3);
+  text(`FPS: ${currentFPS}`, width * 0.77, height * 0.82);
+  frameForFPS++;
   if (player.isLoading) {
     if (!t0[0]) t0[0] = millis();
     text(
